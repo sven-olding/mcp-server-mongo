@@ -1,0 +1,18 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "mcp-server-mongo"
+version = "0.1.0"
+description = "MCP server with MongoDB integration"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "mcp[cli]>=0.1.0",
+    "pymongo>=4.6.1",
+    "python-dotenv>=1.0.0"
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["."]
