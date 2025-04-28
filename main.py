@@ -36,6 +36,8 @@ async def app_lifespan(server: FastMCP) -> AsyncIterator[AppContext]:
         yield AppContext(client=client, db=db)
     finally:
         client.close()
+        # Force close all connections
+        client._topology.close()
 
 
 # Create MCP server with MongoDB integration
