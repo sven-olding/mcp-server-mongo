@@ -63,7 +63,7 @@ def query_collection(
     projection: Optional[Dict[str, Any]] = None,
     limit: int = 10,
     skip: int = 0,
-    sort: Optional[List[tuple[str, int]]] = None,
+    sort: Optional[Dict[str, int]] = None,
 ) -> str:
     """
     Query documents from a MongoDB collection.
@@ -74,7 +74,7 @@ def query_collection(
         projection: Fields to include/exclude in the results
         limit: Maximum number of documents to return
         skip: Number of documents to skip
-        sort: List of (field, direction) tuples for sorting
+        sort: Dictionary of field names and sort directions (1 for ascending, -1 for descending)
     """
     db = ctx.request_context.lifespan_context.db
 
@@ -85,7 +85,7 @@ def query_collection(
         )
 
         if sort:
-            cursor = cursor.sort(sort)
+            cursor = cursor.sort(list(sort.items()))
 
         cursor = cursor.skip(skip).limit(limit)
         results = list(cursor)
