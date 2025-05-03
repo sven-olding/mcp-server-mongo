@@ -59,7 +59,7 @@ def list_collections(ctx: Context) -> List[str]:
 def query_collection(
     ctx: Context,
     collection: str,
-    query: Dict[str, Any],
+    query: Dict[str, Any] = {},
     projection: Optional[Dict[str, Any]] = None,
     limit: int = 10,
     skip: int = 0,
@@ -97,7 +97,7 @@ def query_collection(
 
 
 @mcp.tool()
-def count_documents(ctx: Context, collection: str, query: Dict[str, Any]) -> int:
+def count_documents(ctx: Context, collection: str, query: Dict[str, Any] = {}) -> int:
     """
     Count documents in a collection that match the query.
 
@@ -153,7 +153,7 @@ def main():
     import uvicorn
 
     app = mcp.sse_app()
-    uvicorn.run(app, host="127.0.0.1", port=8000)
+    uvicorn.run(app, host="127.0.0.1", port=8008)
 
 
 if __name__ == "__main__":
